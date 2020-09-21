@@ -1,23 +1,100 @@
 import React, { Component } from "react";
-import { MDBBtn, MDBCol, MDBContainer, MDBRow } from "mdbreact";
+import { Switch, Route, withRouter } from 'react-router-dom';
+import Login from './components/Login'
+import Signup from './components/Signup'
+import Home from './components/Home'
 import "./index.css";
-import logo from "./logo.png";
+import Nav from "./components/Nav";
+
+const api = 'http://localhost:3000/api/v1'
 
 class App extends Component {
+  state = {
+    user: null,
+    avatar: "",
+    bio: ""
+  }
+  
+  componentDidMount() {
+    const token = localStorage.getItem("token")
+    if(token){
+      fetch(`${api}/profile`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}`}
+      })
+      .then(resp => resp.json())
+      .then(data => {
+      this.setState({ user: data })
+      })
+    }
+  }
+
+  signupHandler = (userObj) => {
+    fetch(`${api}/users`, {
+      method: "POST",
+      headers: {
+        accepts: "application/json",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ user: userObj })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      localStorage.setItem("token", data.jwt)
+      localStorage.setItem("key", data.key)
+      this.setState({ user: data}, () => this.props.history.push('/'))
+    }) 
+    .catch(err => {
+      window.alert("Username already taken.");
+      localStorage.removeItem("token")
+      localStorage.removeItem("key")
+    })
+  }
+
+  loginHandler = (userObj) => {
+    fetch(`${api}/login`, {
+      method: "POST",
+      headers: {
+        accepts: "application/json",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ user: userObj })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      localStorage.setItem("token", data.jwt)
+      localStorage.setItem("key", data.key)
+      this.setState(
+        { user: data, 
+          avatar: data.user.avatar, 
+          bio: data.user.bio}, 
+          () => this.props.history.push('/'))
+    })
+    .catch(err => {
+      window.alert("invalid Username or Password.");
+      localStorage.removeItem("token")
+    })
+  }
+
+  logOutHandler = (e) => {
+    e.preventDefault()
+    localStorage.removeItem("token")
+    this.props.history.push("/login")
+    this.setState({ user: null })
+  }
+
   render() {
     return (
-      <MDBContainer>
-        <MDBRow center style={{ height: "100vh" }}>
-          <MDBCol middle="true" sm="8" className="text-center">
-            <img src={logo} alt="logo" style={{ width: "10rem" }} />
-            <h1>Welcome to Your MDB React App</h1>
-            <p className="mb-2">The application is configured and ready to import our components.</p>
-            <MDBBtn href="https://mdbootstrap.com/docs/react/" target="blank" color="light-blue"><strong>Check out our docs!</strong></MDBBtn>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+      <div className="App">
+        <Nav logout={this.logOutHandler} user={this.props.user}/>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>}/>
+          <Route path="/login" render={()=> <Login submitHandler={this.loginHandler}/>}/>
+        </Switch>
+      </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
