@@ -19,16 +19,15 @@ class Profile extends React.Component {
                     <MDBCardHeader>
                         User Profile
                     </MDBCardHeader>
-                    {this.props.user ? console.log(this.props.user.user.avatar) : ''}
                     {
-                    this.props.user && this.props.user.user.avatar ?
+                    this.props.user && this.props.avatar !== null ?
                         <MDBCardImage
                             style={{
                                 height: '200px',
                                 width: 'auto'
                             }} 
                             className="image-fluid" 
-                            src={this.props.user.user.avatar} 
+                            src={this.props.avatar} 
                             waves 
                             alt=''
                         />
@@ -45,14 +44,20 @@ class Profile extends React.Component {
                         />
                     }
                     <MDBCardBody>
-                        <MDBCardTitle>{this.props.user ? this.props.user.user.username : ''}</MDBCardTitle>
-                        <MDBCardText>{this.props.user ? this.props.user.user.bio : ''}</MDBCardText>
+                        <MDBCardTitle>{this.props.user ? this.props.username : ''}</MDBCardTitle>
+                        <MDBCardText>{this.props.user ? this.props.bio : ''}</MDBCardText>
                     </MDBCardBody>
                     <MDBCardFooter>
                         <MDBBtn onClick={()=>{this.useModal(true)}} color='unique'>Edit Profile</MDBBtn>
                     </MDBCardFooter>
                 </MDBCard>
-                <ProfileModal toggle={this.useModal} isOpen={this.state.modal}/>
+                <ProfileModal 
+                    patchUser={this.props.patchUser}
+                    imgChange={this.props.imgChange} 
+                    bioChange={this.props.bioChange} 
+                    toggle={this.useModal} 
+                    isOpen={this.state.modal}
+                />
             </MDBContainer>
         )}
 }

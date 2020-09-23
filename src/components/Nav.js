@@ -34,6 +34,9 @@ render() {
                     <MDBNavItem active={this.state.path==='/#!' ? true : false}>
                         <MDBNavLink onClick={()=> this.changePath('#!')} to='#!'>Forum</MDBNavLink>
                     </MDBNavItem>
+                    <MDBNavItem active={this.state.path==='/users' ? true : false}>
+                        <MDBNavLink onClick={()=> this.changePath('/users')} to='/users'>Users</MDBNavLink>
+                    </MDBNavItem>
                 </MDBNavbarNav>
                 <MDBNavbarNav right>
                     <MDBNavItem>
@@ -44,13 +47,11 @@ render() {
                             {this.props.user ?
                             
                             <MDBDropdownMenu right className="dropdown-default">
-                                {console.log(this.props.user)}
-                                <MDBDropdownItem href="/profile">Profile</MDBDropdownItem>
+                                <MDBDropdownItem href={`/users/${this.props.user.user.username}`}>Profile</MDBDropdownItem>
                                 <MDBDropdownItem href="/" onClick={(e)=>this.props.logout(e)}>Log Out</MDBDropdownItem>
                             </MDBDropdownMenu>
                             :
                             <MDBDropdownMenu right className="dropdown-default">
-                                {console.log(this.props.user)}
                                 <MDBDropdownItem href="/login">Log In</MDBDropdownItem>
                                 <MDBDropdownItem href='/signup'>Sign Up</MDBDropdownItem>
                             </MDBDropdownMenu>}

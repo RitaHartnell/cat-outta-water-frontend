@@ -7,6 +7,7 @@ import Profile from './components/Profile'
 import "./index.css";
 import Nav from "./components/Nav";
 import GameWindow from "./game components/GameWindow";
+import AllUsers from './containers/AllUsers'
 
 const api = 'http://localhost:3000/api/v1'
 
@@ -15,6 +16,7 @@ class App extends Component {
     user: null,
     avatar: "",
     bio: "",
+    username: ""
   }
   
   componentDidMount() {
@@ -26,7 +28,12 @@ class App extends Component {
       })
       .then(resp => resp.json())
       .then(data => {
-      this.setState({ user: data.user })
+        this.setState({ 
+          user: data.user,  
+          bio: data.user.user.bio, 
+          avatar: data.user.user.avatar, 
+          username: data.user.user.username 
+        })
       })
     }
   }
@@ -44,7 +51,12 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt)
       localStorage.setItem("key", data.key)
-      this.setState({ user: data.user }, () => this.props.history.push('/'))
+      this.setState({ 
+        user: data.user, 
+        bio: data.user.user.bio, 
+        avatar: data.user.user.avatar, 
+        username: data.user.user.username 
+      }, () => this.props.history.push('/'))
     }) 
     .catch(err => {
       window.alert("Username already taken.");
@@ -69,7 +81,9 @@ class App extends Component {
       this.setState(
         { user: data.user, 
           avatar: data.user.avatar, 
-          bio: data.user.bio}, 
+          bio: data.user.bio,
+          username: data.user.username
+        }, 
           () => this.props.history.push('/'))
     })
     .catch(err => {
@@ -88,7 +102,7 @@ class App extends Component {
   patchUser = () => {
     const token = localStorage.getItem("token")
     const user = {
-        username: this.state.user.user.username,
+        username: this.state.username,
         avatar: this.state.avatar,
         bio: this.state.bio
     }
@@ -104,7 +118,10 @@ class App extends Component {
         })
     .then(resp => resp.json())
     .then(data => this.setState({
-      user: data
+      user: data.user,
+      avatar: data.user.user.avatar,
+      bio: data.user.user.bio,
+      username: data.user.user.username
     }))
   }
 
@@ -125,14 +142,18 @@ class App extends Component {
           <Route path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>}/>
           <Route path="/login" render={()=> <Login submitHandler={this.loginHandler}/>}/>
           <Route path='/game' render={()=> <GameWindow/>}/>
+          <Route exact path="/users" render={()=> <AllUsers/>}/>
           <Route 
-            path="/profile" 
+            path={`/users/${this.state.username}`} 
             render={
               () => {
                 return(
                   <Profile 
                     patchUser={this.patchUser} 
                     user={this.state.user}
+                    username={this.state.username}
+                    bio={this.state.bio}
+                    avatar={this.state.avatar}
                     imgChange={this.imgChange}
                     bioChange={this.bioChange}
                   />
