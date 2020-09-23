@@ -3,8 +3,10 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Home from './components/Home'
+import Profile from './components/Profile'
 import "./index.css";
 import Nav from "./components/Nav";
+import GameWindow from "./game components/GameWindow";
 
 const api = 'http://localhost:3000/api/v1'
 
@@ -12,7 +14,7 @@ class App extends Component {
   state = {
     user: null,
     avatar: "",
-    bio: ""
+    bio: "",
   }
   
   componentDidMount() {
@@ -24,7 +26,7 @@ class App extends Component {
       })
       .then(resp => resp.json())
       .then(data => {
-      this.setState({ user: data })
+      this.setState({ user: data.user })
       })
     }
   }
@@ -42,7 +44,7 @@ class App extends Component {
     .then(data => {
       localStorage.setItem("token", data.jwt)
       localStorage.setItem("key", data.key)
-      this.setState({ user: data}, () => this.props.history.push('/'))
+      this.setState({ user: data.user }, () => this.props.history.push('/'))
     }) 
     .catch(err => {
       window.alert("Username already taken.");
@@ -65,7 +67,7 @@ class App extends Component {
       localStorage.setItem("token", data.jwt)
       localStorage.setItem("key", data.key)
       this.setState(
-        { user: data, 
+        { user: data.user, 
           avatar: data.user.avatar, 
           bio: data.user.bio}, 
           () => this.props.history.push('/'))
@@ -83,14 +85,61 @@ class App extends Component {
     this.setState({ user: null })
   }
 
+  patchUser = () => {
+    const token = localStorage.getItem("token")
+    const user = {
+        username: this.state.user.user.username,
+        avatar: this.state.avatar,
+        bio: this.state.bio
+    }
+
+    fetch(`${api}/users/${this.state.user.user.id}`,
+        {
+            method: 'PATCH',
+            body: JSON.stringify(user),
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-type': 'application/json'
+            }
+        })
+    .then(resp => resp.json())
+    .then(data => this.setState({
+      user: data
+    }))
+  }
+
+  imgChange = (e) => {
+    this.setState({avatar: e.target.value})
+  }
+
+  bioChange = (e) => {
+    this.setState({bio: e.target.value})
+  }
+
   render() {
     return (
       <div className="App">
-        <Nav logout={this.logOutHandler} user={this.props.user}/>
+        <Nav logout={this.logOutHandler} user={this.state.user}/>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={()=> <Home/>} />
           <Route path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>}/>
           <Route path="/login" render={()=> <Login submitHandler={this.loginHandler}/>}/>
+          <Route path='/game' render={()=> <GameWindow/>}/>
+          <Route 
+            path="/profile" 
+            render={
+              () => {
+                return(
+                  <Profile 
+                    patchUser={this.patchUser} 
+                    user={this.state.user}
+                    imgChange={this.imgChange}
+                    bioChange={this.bioChange}
+                  />
+                )
+              }
+            }
+          />
         </Switch>
       </div>
     );

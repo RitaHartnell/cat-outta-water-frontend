@@ -1,9 +1,10 @@
+import { MDBContainer } from 'mdbreact'
 import React from 'react'
 
 export default function Home() {
     return (
-        <div>
+        <MDBContainer>
             <p>shh</p>
-        </div>
+        </MDBContainer>
     )
 }
