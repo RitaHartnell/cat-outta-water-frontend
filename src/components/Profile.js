@@ -1,5 +1,5 @@
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardFooter, MDBCardHeader, MDBCardImage, MDBCardText, MDBCardTitle, MDBContainer } from 'mdbreact'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import def from '../assets/default-avatar.png'
 import ProfileModal from '../containers/ProfileModal'
 
