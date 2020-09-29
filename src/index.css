@@ -4,6 +4,6 @@
     bottom: 0px;
 }
 
-/* .hovers:hover{
-
-} */
+.hovers:hover{
+    text-shadow: 1px 1px #999999;
+}

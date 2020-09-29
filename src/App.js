@@ -16,7 +16,8 @@ class App extends Component {
     user: null,
     avatar: "",
     bio: "",
-    username: ""
+    username: "",
+    saveState: 0
   }
 
   
@@ -34,7 +35,8 @@ class App extends Component {
           user: data.user,  
           bio: data.user.user.bio, 
           avatar: data.user.user.avatar, 
-          username: data.user.user.username 
+          username: data.user.user.username,
+          saveState: data.user.user.save_state
         })
       })
     }
@@ -57,7 +59,8 @@ class App extends Component {
         user: data.user, 
         bio: data.user.user.bio, 
         avatar: data.user.user.avatar, 
-        username: data.user.user.username 
+        username: data.user.user.username ,
+        saveState: data.user.user.save_state
       }, () => this.props.history.push('/'))
     }) 
     .catch(err => {
@@ -84,7 +87,8 @@ class App extends Component {
         { user: data.user, 
           avatar: data.user.avatar, 
           bio: data.user.bio,
-          username: data.user.username
+          username: data.user.username,
+          saveState: data.user.user.save_state
         }, 
           () => this.props.history.push('/'))
     })
@@ -106,7 +110,8 @@ class App extends Component {
     const user = {
         username: this.state.username,
         avatar: this.state.avatar,
-        bio: this.state.bio
+        bio: this.state.bio,
+        save_state: this.state.saveState
     }
 
     fetch(`${api}/users/${this.state.user.user.id}`,
@@ -123,8 +128,13 @@ class App extends Component {
       user: data.user,
       avatar: data.user.user.avatar,
       bio: data.user.user.bio,
-      username: data.user.user.username
+      username: data.user.user.username,
+      saveState: data.user.user.save_state
     }))
+  }
+
+  saveGame = (page) => {
+    this.setState({saveState: page}, () => this.patchUser())
   }
 
   imgChange = (e) => {
@@ -143,7 +153,7 @@ class App extends Component {
           <Route exact path="/" render={()=> <Home/>} />
           <Route path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>}/>
           <Route path="/login" render={()=> <Login submitHandler={this.loginHandler}/>}/>
-          <Route path='/game' render={()=> <GameWindow/>}/>
+          <Route path='/game' render={()=> <GameWindow saveGame={this.saveGame} saveState={this.state.saveState}/>}/>
           <Route exact path="/users" render={()=> <AllUsers user={this.state.user}/>}/>
           <Route 
             path={`/users/${this.state.username}`} 

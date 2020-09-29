@@ -14,6 +14,10 @@ class GameWindow extends React.Component {
         this.setState({page: choice.goto})
     }
 
+    loadGame = () => {
+        this.setState({page: this.props.saveState})
+    }
+
     render() {
         return(
             <MDBContainer>
@@ -24,13 +28,15 @@ class GameWindow extends React.Component {
                     <MDBCardFooter>
                         <MDBRow around> 
                             <MDBCol style={{textAlign: 'left'}}>
-                                <MDBBtn color='unique'>Back</MDBBtn>
-                            </MDBCol>
-                            <MDBCol style={{textAlign: 'center'}}>
-                                <MDBBtn color='unique'>Save</MDBBtn>
+                                <MDBBtn color='unique' onClick={()=> this.loadGame()} >Load</MDBBtn>
                             </MDBCol>
                             <MDBCol style={{textAlign: 'right'}}>
-                                <MDBBtn color='unique'>Next</MDBBtn>
+                                <MDBBtn color='unique' onClick={
+                                    () => {
+                                        this.props.saveGame(this.state.page)
+                                        window.alert('saved!')
+                                    }
+                                }>Save</MDBBtn>
                             </MDBCol>
                         </MDBRow>
                     </MDBCardFooter>
