@@ -6,7 +6,8 @@ const api = 'http://localhost:3000/api/v1'
 
 export default class AllUsers extends React.Component{
     state = {
-        users: []
+        users: [],
+        comments: []
     }
 
     makeGrid = () => {
@@ -39,6 +40,7 @@ export default class AllUsers extends React.Component{
                                         username={userObj.username}
                                         avatar={userObj.avatar}
                                         bio={userObj.bio}
+                                        comments={this.filterComments(userObj)}
                                     />
                                 </MDBCol> 
                             )}
@@ -54,8 +56,26 @@ export default class AllUsers extends React.Component{
         fetch(`${api}/users`)
         .then(response => response.json())
         .then(data => {
-            this.setState({users: data}, ()=> console.log(this.state.users))
+            this.setState({users: data}, ()=> {
+                console.log(this.state.users)
+                this.getComments()
+            })
         }) 
+    }
+
+    getComments = () => {
+        fetch(`${api}/comments`)
+        .then(response => response.json())
+        .then(data => {
+            this.setState({comments: data}, () => console.log(this.state.comments))
+        })
+    }
+
+    filterComments = (user) => {
+        const commentsCopy = [...this.state.comments]
+        const filtered = commentsCopy.filter(comment => comment.commentee_id === user.id)
+
+        return filtered
     }
 
     render() {

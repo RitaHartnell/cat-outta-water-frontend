@@ -2,14 +2,42 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardFooter, MDBCardHeader, MDBCardImag
 import React from 'react'
 import def from '../assets/default-avatar.png'
 import ProfileModal from '../containers/ProfileModal'
+import Comment from './Comment'
+
+const api = 'http://localhost:3000/api/v1'
 
 class Profile extends React.Component {
     state = {
-        modal: false
+        modal: false,
+        comments: []
     }
 
     useModal = (bool) => {
         this.setState({modal: bool})
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.user !== this.props.user) {
+            console.log(prevProps)
+            if (this.props.user) {
+                this.getComments()
+            }
+        }
+    }
+
+    getComments = () => {
+        fetch(`${api}/comments`)
+        .then(response => response.json())
+        .then(data => {
+            this.setState({comments: this.filterComments(data, this.props.user.user)}, () => console.log(this.state.comments))
+        })
+    }
+
+    filterComments = (comments, user) => {
+        const commentsCopy = [...comments]
+        const filtered = commentsCopy.filter(comment => comment.commentee_id === user.id)
+
+        return filtered
     }
 
     render() {
@@ -46,6 +74,11 @@ class Profile extends React.Component {
                     <MDBCardBody>
                         <MDBCardTitle>{this.props.user ? this.props.username : ''}</MDBCardTitle>
                         <MDBCardText>{this.props.user ? this.props.bio : ''}</MDBCardText>
+                        {
+                            this.props.user && this.state.comments.length !== 0 ? 
+                                this.state.comments.map(comment => <Comment key={comment.id} comment={comment}/>) 
+                                : <MDBCardText>No one's commented on you yet :(</MDBCardText>
+                        }
                     </MDBCardBody>
                     <MDBCardFooter>
                         <MDBBtn onClick={()=>{this.useModal(true)}} color='unique'>Edit Profile</MDBBtn>

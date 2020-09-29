@@ -1,4 +1,5 @@
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCardText, MDBCardTitle } from 'mdbreact'
+import { MDBCard, MDBCardBody, MDBCardFooter, MDBCardImage, MDBCardText, MDBCardTitle, MDBBtn } from 'mdbreact'
+import Comment from './Comment'
 import React from 'react'
 import def from '../assets/default-avatar.png'
 
@@ -34,6 +35,16 @@ const User = (props) => {
                 <MDBCardTitle>{props.user ? props.username : ''}</MDBCardTitle>
                 <MDBCardText>{props.user ? props.bio : ''}</MDBCardText>
             </MDBCardBody>
+            {props.comments !== [] ? 
+                <MDBCardFooter>
+                    {props.comments.map(comment => <Comment key={comment.id} comment={comment}/>)}
+                    <MDBBtn color='unique'>Leave Comment</MDBBtn>
+                </MDBCardFooter>
+                :
+                <MDBCardFooter>
+                    <MDBBtn color='unique'>Leave Comment</MDBBtn>
+                </MDBCardFooter>
+            }
         </MDBCard>
     )
 }
