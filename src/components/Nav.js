@@ -20,7 +20,7 @@ render() {
     return(
         <MDBNavbar style={{backgroundColor: '#880e4f'}} dark expand="md">
             <MDBNavbarBrand>
-                <strong className="white-text">Navbar</strong>
+                <strong className="white-text">Cat Became Hungry</strong>
             </MDBNavbarBrand>
             <MDBNavbarToggler onClick={this.toggleCollapse} />
             <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>

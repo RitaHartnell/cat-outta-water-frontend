@@ -5,7 +5,7 @@ class CommentModal extends Component {
     render() {
         return(
             <MDBModal center isOpen={this.props.isOpen}>
-                <MDBModalHeader>Edit Profile</MDBModalHeader>
+                <MDBModalHeader>Comment for {this.props.username}</MDBModalHeader>
                 <MDBModalBody>
                     <MDBInput
                         onChange={(e)=>{this.props.commentChange(e)}}
@@ -27,7 +27,7 @@ class CommentModal extends Component {
                         onClick={
                             () => {
                                 this.props.toggle(false)
-                                this.props.patchComment()
+                                this.props.postComment(this.props.user)
                             }
                         }
                     >

@@ -18,6 +18,8 @@ class App extends Component {
     bio: "",
     username: ""
   }
+
+  
   
   componentDidMount() {
     const token = localStorage.getItem("token")
@@ -142,7 +144,7 @@ class App extends Component {
           <Route path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>}/>
           <Route path="/login" render={()=> <Login submitHandler={this.loginHandler}/>}/>
           <Route path='/game' render={()=> <GameWindow/>}/>
-          <Route exact path="/users" render={()=> <AllUsers/>}/>
+          <Route exact path="/users" render={()=> <AllUsers user={this.state.user}/>}/>
           <Route 
             path={`/users/${this.state.username}`} 
             render={

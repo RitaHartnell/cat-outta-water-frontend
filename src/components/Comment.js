@@ -17,8 +17,11 @@ const Comment = (props) => {
 
     return(
         <MDBCardText>
-            <span><img style={{width: '25px', height: 'auto'}} src={commentor ? commentor.avatar : ''} alt='' className='img-fluid'/> User: {commentor ? commentor.username : ''}</span>
-            <p>{props.comment.comment}</p>
+            <span>
+                <img style={{width: '25px', height: 'auto'}} src={commentor ? commentor.avatar : ''} alt='' className='img-fluid'/> User: {commentor ? commentor.username : ''}
+                <br/>
+                {props.comment.comment}
+            </span>
         </MDBCardText>
     )
 }

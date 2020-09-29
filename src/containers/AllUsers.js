@@ -1,13 +1,34 @@
 import {MDBCol, MDBContainer, MDBRow} from 'mdbreact'
 import React from 'react'
-import User from '../components/User'
+import UserCard from '../components/UserCard'
 
 const api = 'http://localhost:3000/api/v1'
 
 export default class AllUsers extends React.Component{
     state = {
         users: [],
-        comments: []
+        comments: [],
+    }
+
+    postComment = (commentee, comment) => {
+        const token = localStorage.getItem("token")
+        const commentObj = {commentor_id: this.props.user.user.id, commentee_id: commentee.id, comment: comment}
+    
+        fetch(`${api}/comments`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                accepts: "application/json",
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({ comment: commentObj })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            const newComments = [...this.state.comments]
+            newComments.push(data)
+            this.setState({comments: newComments})
+        })
     }
 
     makeGrid = () => {
@@ -34,8 +55,9 @@ export default class AllUsers extends React.Component{
                         {row.map( (userObj) => {
                             return(
                                 <MDBCol>
-                                    <User 
-                                        key={userObj.id}
+                                    <UserCard
+                                        postComment={this.postComment}
+                                        key={idx}
                                         user={userObj}
                                         username={userObj.username}
                                         avatar={userObj.avatar}
