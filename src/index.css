@@ -1,7 +1,7 @@
 .no-black div {
     position: absolute !important;
-    background-color: transparent !important;
     bottom: 0px;
+    opacity: 1;
 }
 
 .hovers:hover{

@@ -35,7 +35,7 @@ const TextRenderer = (props) => {
                             paddingBottom: '15px'
                         }}>
                             <span>{text}</span><br/>
-                            {choices.a !== null ? <span className='hovers' onClick={()=>{props.choice(choices.a)}}>{choices.a.text}</span> : <></>}<br/>
+                            {choices.a !== null ? <span className='hovers' onClick={()=>{props.choice(choices.a)}}>{choices.a.text}</span> : <span className='hovers' onClick={() => props.next()}>next</span>}<br/>
                             {choices.b !== null ? <span className='hovers' onClick={()=>{props.choice(choices.b)}}>{choices.b.text}</span> : <></>}
                         </div>
                         

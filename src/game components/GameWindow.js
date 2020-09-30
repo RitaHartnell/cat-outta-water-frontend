@@ -6,12 +6,30 @@ import BackgroundRenderer from './BackgroundRenderer'
 
 class GameWindow extends React.Component {
 
-    state = {
-        page: 0
+    constructor(props) {
+        super(props)
+        this.state = {
+            page: 0
+        }
+    }
+
+    componentDidMount(){
+        this.loadGame()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.page !== this.state.page || prevProps.saveState !== this.props.saveState) {
+            this.loadGame()
+        }
     }
 
     choiceClick = (choice) => {
         this.setState({page: choice.goto})
+    }
+
+    nextClick = () => {
+        const newPage = this.state.page + 1
+        this.setState({page: newPage})
     }
 
     loadGame = () => {
@@ -23,7 +41,7 @@ class GameWindow extends React.Component {
             <MDBContainer>
                 <MDBCard>
                     <MDBCardBody>
-                        <BackgroundRenderer choice={this.choiceClick} page={this.state.page}/>
+                        <BackgroundRenderer next={this.nextClick} choice={this.choiceClick} page={this.state.page}/>
                     </MDBCardBody>
                     <MDBCardFooter>
                         <MDBRow around> 

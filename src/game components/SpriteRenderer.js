@@ -1,7 +1,7 @@
 import { MDBRow, MDBCol } from 'mdbreact';
 import React, {useState, useEffect} from 'react'
 import pages from '../assets/order/order'
-import {LayeredImage} from 'react-layered-image'
+import LayeredImage from './LayeredImage'
 
 
 
@@ -27,30 +27,21 @@ const SpriteRenderer = (props) => {
             bottom: '100px',
         }}>
             <MDBCol className='no-black'>
-                <LayeredImage 
-                    shadowColor='#fff' 
-                    aspectRatio={spriteL.eyes !== '' ? (16 / 25) : (16/15)} 
-                    layers={spriteL.eyes !=='' ? [spriteL.body, spriteL.eyes, spriteL.mouth] : [spriteL.body]} 
-                    lightOpacity={0} 
-                    shadowOpacity={0}
+                <LayeredImage
+                    aspectRatio={spriteL.eyes !== '' ? (16/25) : (16/15)} 
+                    sprite={spriteL} 
                 />
             </MDBCol>
             <MDBCol className='no-black'>
-                <LayeredImage 
-                    shadowColor='#fff' 
+                <LayeredImage
                     aspectRatio={spriteC.eyes !== '' ? (16 / 25) : (16/15)} 
-                    layers={spriteC.eyes !== '' ? [spriteC.body, spriteC.eyes, spriteC.mouth] : [spriteC.body]} 
-                    lightOpacity={0} 
-                    shadowOpacity={0}
+                    sprite={spriteC}
                 />
             </MDBCol>
             <MDBCol className='no-black'>
-                <LayeredImage 
-                    shadowColor='#fff' 
+                <LayeredImage
                     aspectRatio={spriteR.eyes !== '' ? (16 / 25) : (16/15)} 
-                    layers={spriteR.eyes !== '' ? [spriteR.body, spriteR.eyes, spriteR.mouth] : [spriteR.body]} 
-                    lightOpacity={0} 
-                    shadowOpacity={0}
+                    sprite={spriteR}
                 />
             </MDBCol>
         </MDBRow>

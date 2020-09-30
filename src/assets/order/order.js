@@ -22,6 +22,21 @@ import fm01MouthSoft01 from '../fm01/fm01-mouth-soft01.png'
 import fm01MouthUpset00 from '../fm01/fm01-mouth-upset00.png'
 import fm01MouthUpset01 from '../fm01/fm01-mouth-upset01.png'
 import fm01MouthWow from '../fm01/fm01-mouth-wow01.png'
+import fm02Body from '../fm02/fm02-body.png'
+import fm02EyesJoy from '../fm02/fm02-eyes-joy.png'
+import fm02EyesNervous from '../fm02/fm02-eyes-nervous.png'
+import fm02EyesSmile from '../fm02/fm02-eyes-smile.png'
+import fm02EyesBawl from '../fm02/fm02-eyes-bawl.png'
+import fm02EyesUpset from '../fm02/fm02-eyes-upset.png'
+import fm02EyesWow from '../fm02/fm02-eyes-wow.png'
+import fm02MouthCry from '../fm02/fm02-mouth-cry01.png' 
+import fm02MouthNervous00 from '../fm02/fm02-mouth-nervous00.png'
+import fm02MouthNervous01 from '../fm02/fm02-mouth-nervous01.png'
+import fm02MouthSmile00 from '../fm02/fm02-mouth-smile00.png'
+import fm02MouthSmile01 from '../fm02/fm02-mouth-smile01.png'
+import fm02MouthUpset00 from '../fm02/fm02-mouth-upset00.png'
+import fm02MouthUpset01 from '../fm02/fm02-mouth-upset01.png'
+import fm02MouthWow from '../fm02/fm02-mouth-wow01.png'
 import KG070000 from '../cat1/KG070000.png'
 import KG070001 from '../cat1/KG070001.png'
 import KG070002 from '../cat1/KG070002.png'
@@ -49,7 +64,7 @@ const pages = [
             eyes: '',
             mouth: ''
         },
-        text: 'Oh hello there kitty! Where did you come from?',
+        text: 'Jen: Oh hello there kitty! Where did you come from?',
         choices: {
             a: {
                 text: 'meow?',
@@ -78,7 +93,7 @@ const pages = [
             eyes: '',
             mouth: ''
         },
-        text: "Aww haha cute kitty, you're a good little one, yes yes.",
+        text: "Jen: Aww haha cute kitty, you're a good little one, yes yes.",
         choices: {
             a: {
                 text: 'nya~',
@@ -104,7 +119,7 @@ const pages = [
             eyes: '',
             mouth: ''
         },
-        text: "Well you're very matter of fact, aren't you?",
+        text: "Jen: Well you're very matter of fact, aren't you?",
         choices: {
             a: {
                 text: 'meow.',
@@ -130,7 +145,7 @@ const pages = [
             eyes: '',
             mouth: ''
         },
-        text: "Okay, I'm gonna go away for a little bit but I'm gonna see what I can do",
+        text: "Jen: Okay, I'm gonna go away for a little bit but I'm gonna see what I can do",
         choices: {
             a: {
                 text: 'meow!',
@@ -138,7 +153,109 @@ const pages = [
             },
             b: null
         }
+    },
+    {
+        background: mst1,
+        spriteLeft: {
+            body: KG070005,
+            eyes: '',
+            mouth: ''
+        },
+        spriteCenter: {
+            body: '',
+            eyes: '',
+            mouth: ''
+        },
+        spriteRight: {
+            body: '',
+            eyes: '',
+            mouth: ''
+        },
+        text: "At this point, nya, you figure there's no point in not waiting around, nya. There definitely could be food as a reward",
+        choices: {
+            a: null,
+            b: null
+        }
+    },
+    {
+        background: mst1,
+        spriteLeft: {
+            body: fm01Body,
+            eyes: fm01EyesSoft,
+            mouth: fm01MouthSerious00
+        },
+        spriteCenter: {
+            body: KG070001,
+            eyes: '',
+            mouth: ''
+        },
+        spriteRight: {
+            body: fm02Body,
+            eyes: fm02EyesWow,
+            mouth: fm02MouthWow
+        },
+        text: "Nan: Oh My Gosh! You were right, Jen, it's so cute and sweet. Can we keep it? Can we keep it??",
+        choices: {
+            a: {
+                text: 'meow!',
+                goto: 6
+            },
+            b: null
+        }
+    },
+    {
+        background: mst1,
+        spriteLeft: {
+            body: fm01Body,
+            eyes: fm01EyesUpset,
+            mouth: fm01MouthSerious00
+        },
+        spriteCenter: {
+            body: KG070000,
+            eyes: '',
+            mouth: ''
+        },
+        spriteRight: {
+            body: fm02Body,
+            eyes: fm02EyesBawl,
+            mouth: fm02MouthCry
+        },
+        text: "Jen: I dunno Nan, it doesn't seem smart to smuggle a cat into the dorm..",
+        choices: {
+            a: {
+                text: 'purrrr',
+                goto: 6
+            },
+            b: null
+        }
+    },
+    {
+        background: mst1,
+        spriteLeft: {
+            body: fm01Body,
+            eyes: fm01EyesSoft,
+            mouth: fm01MouthSoft01
+        },
+        spriteCenter: {
+            body: KG070000,
+            eyes: '',
+            mouth: ''
+        },
+        spriteRight: {
+            body: fm02Body,
+            eyes: fm02EyesBawl,
+            mouth: fm02MouthCry
+        },
+        text: "Nan: **sniff** You're so mean, look how much she loves ussss",
+        choices: {
+            a: {
+                text: 'nya~~',
+                goto: 7
+            },
+            b: null
+        }
     }
+
 ]
 
 export default pages

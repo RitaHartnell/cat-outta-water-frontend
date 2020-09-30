@@ -19,9 +19,6 @@ class App extends Component {
     username: "",
     saveState: 0
   }
-
-  
-  
   componentDidMount() {
     const token = localStorage.getItem("token")
     if(token){

@@ -62,6 +62,7 @@ class UserModal extends React.Component {
                         <MDBBtn color='unique' onClick={()=>{this.useModal(true)}}>Leave Comment</MDBBtn>
                     </MDBModalFooter>
                 <CommentModal 
+                    user={this.props.user}
                     toggle={this.useModal}
                     isOpen={this.state.isOpen}
                     commentChange={this.props.commentChange}

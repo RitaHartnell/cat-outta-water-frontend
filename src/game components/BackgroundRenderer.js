@@ -19,7 +19,7 @@ const BackgroundRenderer = (props) => {
             height: '550px'
         }}>
             <SpriteRenderer page={props.page}/>
-            <TextRenderer choice={props.choice} page={props.page}/>
+            <TextRenderer next={props.next} choice={props.choice} page={props.page}/>
         </div>
     )
 }
