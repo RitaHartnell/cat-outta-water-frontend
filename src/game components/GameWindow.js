@@ -18,7 +18,7 @@ class GameWindow extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(prevState.page !== this.state.page || prevProps.saveState !== this.props.saveState) {
+        if(prevProps.saveState !== this.props.saveState || (prevState.page !== this.state.page && this.state.page == 0)) {
             this.loadGame()
         }
     }

@@ -8,6 +8,7 @@ import "./index.css";
 import Nav from "./components/Nav";
 import GameWindow from "./game components/GameWindow";
 import AllUsers from './containers/AllUsers'
+import FooterPage from "./components/Footer";
 
 const api = 'http://localhost:3000/api/v1'
 
@@ -171,6 +172,7 @@ class App extends Component {
             }
           />
         </Switch>
+        <FooterPage/>
       </div>
     );
   }

@@ -46,8 +46,8 @@ import KG070005 from '../cat1/KG070005.png'
 import KG070006 from '../cat1/KG070006.png'
 
 
-const pages = [
-    {
+const pages = {
+    0: {
         background: mst1,
         spriteLeft: {
             body: fm01Body,
@@ -76,7 +76,7 @@ const pages = [
             }
         }
     },
-    {
+    1: {
         background: mst1,
         spriteLeft: {
             body: fm01Body,
@@ -102,7 +102,7 @@ const pages = [
             b: null
         }
     },
-    {
+    2: {
         background: mst1,
         spriteLeft: {
             body: fm01Body,
@@ -128,7 +128,7 @@ const pages = [
             b: null
         }
     },
-    {
+    3: {
         background: mst1,
         spriteLeft: {
             body: fm01Body,
@@ -154,7 +154,7 @@ const pages = [
             b: null
         }
     },
-    {
+    4: {
         background: mst1,
         spriteLeft: {
             body: KG070005,
@@ -177,7 +177,7 @@ const pages = [
             b: null
         }
     },
-    {
+    5: {
         background: mst1,
         spriteLeft: {
             body: fm01Body,
@@ -203,7 +203,7 @@ const pages = [
             b: null
         }
     },
-    {
+    6: {
         background: mst1,
         spriteLeft: {
             body: fm01Body,
@@ -211,7 +211,7 @@ const pages = [
             mouth: fm01MouthSerious00
         },
         spriteCenter: {
-            body: KG070000,
+            body: KG070002,
             eyes: '',
             mouth: ''
         },
@@ -224,12 +224,12 @@ const pages = [
         choices: {
             a: {
                 text: 'purrrr',
-                goto: 6
+                goto: 7
             },
             b: null
         }
     },
-    {
+    7: {
         background: mst1,
         spriteLeft: {
             body: fm01Body,
@@ -237,7 +237,7 @@ const pages = [
             mouth: fm01MouthSoft01
         },
         spriteCenter: {
-            body: KG070000,
+            body: KG070002,
             eyes: '',
             mouth: ''
         },
@@ -256,6 +256,6 @@ const pages = [
         }
     }
 
-]
+}
 
 export default pages
