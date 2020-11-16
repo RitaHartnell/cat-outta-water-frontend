@@ -2,7 +2,7 @@ import {MDBCol, MDBContainer, MDBRow} from 'mdbreact'
 import React from 'react'
 import UserCard from '../components/UserCard'
 
-const api = 'http://localhost:3000/api/v1'
+const api = 'https://cat-became-hungry-api.herokuapp.com/api/v1'
 
 export default class AllUsers extends React.Component{
     state = {

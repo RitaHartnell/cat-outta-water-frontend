@@ -4,7 +4,7 @@ import def from '../assets/default-avatar.png'
 import ProfileModal from '../containers/ProfileModal'
 import Comment from './Comment'
 
-const api = 'http://localhost:3000/api/v1'
+const api = 'https://cat-became-hungry-api.herokuapp.com/api/v1'
 
 class Profile extends React.Component {
     state = {

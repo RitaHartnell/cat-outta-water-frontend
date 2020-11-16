@@ -10,7 +10,7 @@ import GameWindow from "./game components/GameWindow";
 import AllUsers from './containers/AllUsers'
 import FooterPage from "./components/Footer";
 
-const api = 'http://localhost:3000/api/v1'
+const api = 'https://cat-became-hungry-api.herokuapp.com/api/v1'
 
 class App extends Component {
   state = {
