@@ -34,7 +34,7 @@ class App extends Component {
           bio: data.user.user.bio, 
           avatar: data.user.user.avatar, 
           username: data.user.user.username,
-          saveState: data.user.user.save_state ? data.user.user.save_state : 0
+          saveState: data.user.user.save_state !== undefined ? data.user.user.save_state : 0
         })
       })
     }
@@ -86,7 +86,7 @@ class App extends Component {
           avatar: data.user.avatar, 
           bio: data.user.bio,
           username: data.user.username,
-          saveState: data.user.user.save_state
+          saveState: data.user.user.save_state !== undefined ? data.user.user.save_state : 0
         }, 
           () => this.props.history.push('/'))
     })
