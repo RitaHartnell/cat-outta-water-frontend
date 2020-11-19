@@ -9,6 +9,7 @@ import Nav from "./components/Nav";
 import GameWindow from "./game components/GameWindow";
 import AllUsers from './containers/AllUsers'
 import FooterPage from "./components/Footer";
+import Forum from "./components/Forum"
 
 const api = 'https://cat-became-hungry-api.herokuapp.com/api/v1'
 
@@ -152,6 +153,7 @@ class App extends Component {
           <Route path="/signup" render={()=> <Signup submitHandler={this.signupHandler}/>}/>
           <Route path="/login" render={()=> <Login submitHandler={this.loginHandler}/>}/>
           <Route path='/game' render={()=> <GameWindow saveGame={this.saveGame} saveState={this.state.saveState}/>}/>
+          <Route path='/forum' render={()=> <Forum/>}/>
           <Route exact path="/users" render={()=> <AllUsers user={this.state.user}/>}/>
           <Route 
             path={`/users/${this.state.username}`} 
