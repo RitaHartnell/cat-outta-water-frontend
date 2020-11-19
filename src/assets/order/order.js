@@ -250,8 +250,31 @@ const pages = {
         choices: {
             a: {
                 text: 'nya~~',
-                goto: 7
+                goto: 'END'
             },
+            b: null
+        }
+    },
+    'END': {
+        background: mst1,
+        spriteLeft: {
+            body: KG070001,
+            eyes: '',
+            mouth: ''
+        },
+        spriteCenter: {
+            body: '',
+            eyes: '',
+            mouth: ''
+        },
+        spriteRight: {
+            body: '',
+            eyes: '',
+            mouth: ''
+        },
+        text: "Thanks for using the test version of the game! That's all we have for now",
+        choices: {
+            a: null,
             b: null
         }
     }

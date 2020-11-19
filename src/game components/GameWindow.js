@@ -28,8 +28,10 @@ class GameWindow extends React.Component {
     }
 
     nextClick = () => {
-        const newPage = this.state.page + 1
-        this.setState({page: newPage})
+        if (this.state.page !== 'END') {
+            const newPage = this.state.page + 1
+            this.setState({page: newPage})
+        }
     }
 
     loadGame = () => {
