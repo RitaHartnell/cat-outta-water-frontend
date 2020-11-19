@@ -31,7 +31,7 @@ render() {
                     <MDBNavItem active={this.state.path==='/game' ? true : false}>
                         <MDBNavLink onClick={()=> this.changePath('/game')} to='/game'>Game</MDBNavLink>
                     </MDBNavItem>
-                    <MDBNavItem active={this.state.path==='/forum!' ? true : false}>
+                    <MDBNavItem active={this.state.path==='/forum' ? true : false}>
                         <MDBNavLink onClick={()=> this.changePath('/forum')} to='/forum'>Forum</MDBNavLink>
                     </MDBNavItem>
                     <MDBNavItem active={this.state.path==='/users' ? true : false}>
